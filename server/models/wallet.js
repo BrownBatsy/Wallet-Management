@@ -7,5 +7,5 @@ const WalletScheema = new mongoose.Schema({
     amount: Number
 })
 
-const WalletModel = mongoose.model("wallet", WalletScheema)
+const WalletModel = mongoose.model("wallets", WalletScheema)
 module.exports = WalletModel

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const UserModel = require('./models/User')
 const WalletModel = require('./models/wallet')
-const limit = require('./models/limit_spend')
+
 
 const app = express()
 app.use(express.json())
@@ -29,12 +29,14 @@ app.post("/login", (req, res) => {
 })
 
 
-// app.get('/home', (req, res) => {
-//     WalletModel.find({})
-// })
+app.get("/fetchwallet", (req, res) => {
+     WalletModel.find()
+     .then(users => res.json(users))
+     .catch(err => res.json(err))
+ })
 
 app.post('/register', (req, res) => {
-    UserModel.create(req.body)
+    WalletModel.create(req.body)
     .then(User => res.json(User))
     .catch(err => console.log(res.json(err)))
 })
@@ -45,10 +47,32 @@ app.post('/AddWallet', (req, res) => {
     .catch(err => console.log(res.json(err)))
 })
 
-app.post('/limitEx', (req, res) => {
-    limit.create(req.body)
-    .then(Limitbanks => res.json(Limitbanks))
-    .catch(err => console.log(res.json(err.message)))
+app.post("/transfer", async (req, res) => {
+    const {email,source, dest, amount} = req.body;
+    console.log(req.body)
+ 
+    //WalletModel.updateOne({email: email, wallet_id: dest},{$set: {amount: amount,wallet_id: 4}})
+   
+  
+    WalletModel.findOne({email: email,wallet_id: source})
+    .then(wallet => {
+         console.log(wallet)
+        if (wallet) {
+ 
+            if(wallet.amount >= amount) {
+                WalletModel.updateMany({email: email, wallet_id: source},{$set: {amount: -amount}})
+                .then(user =>{})
+                WalletModel.updateOne({email: email, wallet_id: dest},{$inc: {amount: amount}})
+                .then(user =>{})
+                res.json('Success')
+            } else {
+                res.json("Insufficient funds")
+            }
+            
+        } else {
+            res.json("Wrong wallet id")
+        }
+    })
 })
 
 app.listen(3001, () => {

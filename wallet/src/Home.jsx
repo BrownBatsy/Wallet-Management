@@ -39,6 +39,14 @@ function Home() {
         </Link>
         <Link to="/login" className="btn btn-default border w-100 bg-light rounded-0 text-default" onClick={handleLogout}>
         Sign Out</Link>
+        <Link to="/showwallet" className="btn btn-default border w-100 bg-light rounded-0 text-default" onClick={handleLogout}>
+        See My Wallets</Link>
+        <Link to="/transferwallet" className="btn btn-default border w-100 bg-light rounded-0 text-default" onClick={handleLogout}>
+        Transfer</Link>
+        <p>Want to request for a loan?</p>
+        <Link to="/loan" className="btn btn-default border w-100 bg-light rounded-0 text-default" onClick={handleLogout}>
+        Ask for a loan</Link>
+        
         
         </div> 
     );

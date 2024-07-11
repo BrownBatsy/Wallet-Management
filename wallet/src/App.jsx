@@ -5,7 +5,10 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './login'
 import Home from './Home'
 import AddWallet from './AddWallet'
-import LimitEx from './limitEx'
+import ShowWallet from './showwallet'
+import Transfer from './transferwallet'
+import Loan from './loan'
+
 
 
 function App() {
@@ -19,7 +22,9 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/AddWallet" element={<AddWallet/>}></Route>
-          <Route path="/limitEx" element={<LimitEx />}></Route>
+          <Route path="/ShowWallet" element={<ShowWallet/>}></Route>
+          <Route path="/transferwallet" element={<Transfer/>}></Route>
+          <Route path="/loan" element={<Loan/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
